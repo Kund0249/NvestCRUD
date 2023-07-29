@@ -1,15 +1,16 @@
-﻿using NvestCRUD.Model;
+﻿using NvestApp.DataLayer.AppInterface;
+using NvestApp.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using System.Data;
 
-namespace NvestCRUD.DataContext
+namespace NvestApp.DataLayer.Repository
 {
-    class DEPRTMENTREPOSITORY : IDEPRTMENTREPOSITORY
+   public class DEPRTMENTREPOSITORY : IDEPRTMENTREPOSITORY
     {
         private string CS;
         public DEPRTMENTREPOSITORY()
@@ -17,11 +18,11 @@ namespace NvestCRUD.DataContext
             CS = "data source=.;database=EmployeeDB;trusted_connection=true";
         }
 
-        public List<DepartmentModel> GetDepartments
+        public List<Department> GetDepartments
         {
             get
             {
-                List<DepartmentModel> list = new List<DepartmentModel>();
+                List<Department> list = new List<Department>();
                 using (SqlConnection con = new SqlConnection(CS))
                 {
                     SqlCommand cmd = new SqlCommand("select * from tblDepartment", con);
@@ -52,7 +53,7 @@ namespace NvestCRUD.DataContext
 
                     foreach (DataRow row in table.Rows)
                     {
-                        list.Add(new DepartmentModel()
+                        list.Add(new Department()
                         {
                             DeptId = Convert.ToInt32(row["DeptId"]),
                             DepartmentName = row["DepartmentName"].ToString()
@@ -64,7 +65,7 @@ namespace NvestCRUD.DataContext
             }
         }
 
-        public bool Save(DepartmentModel department, out int StatusCode, out string Messge)
+        public bool Save(Department department, out int StatusCode, out string Messge)
         {
             try
             {
@@ -87,7 +88,7 @@ namespace NvestCRUD.DataContext
                             Messge = reader["Message"].ToString();
                         }
                     }
-                   
+
                     con.Close();
                 }
 

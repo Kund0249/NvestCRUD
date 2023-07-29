@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1635170F-F037-4345-90A5-3EA53E2AFADE}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>NvestCRUD</RootNamespace>
-    <AssemblyName>NvestCRUD</AssemblyName>
+    <ProjectGuid>{EB1607FD-EF93-44E1-8CF2-13529A1E9933}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NvestApp.Model</RootNamespace>
+    <AssemblyName>NvestApp.Model</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,26 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext\DEPRTMENTREPOSITORY.cs" />
-    <Compile Include="DataContext\IDEPRTMENTREPOSITORY.cs" />
-    <Compile Include="DataProcessor\DEPARTMENTDATAPROCESSOR.cs" />
-    <Compile Include="DataProcessor\IDEPARTMENTDATAPROCESSOR.cs" />
-    <Compile Include="Model\DepartmentModel.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Department.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NvestApp.Model\NvestApp.Model.csproj">
-      <Project>{eb1607fd-ef93-44e1-8cf2-13529a1e9933}</Project>
-      <Name>NvestApp.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NvestApp.Processor\NvestApp.Processor.csproj">
-      <Project>{ca5723d4-b1d8-4e6e-82bb-e8f8d611a191}</Project>
-      <Name>NvestApp.Processor</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,7 +18,7 @@ namespace NvestCRUD.DataProcessor
             repo = new DEPRTMENTREPOSITORY();
            // n = 10;
         }
-        public bool Save(Department department, out int StatusCode, out string Messge)
+        public bool Save(DepartmentModel department, out int StatusCode, out string Messge)
         {
             return repo.Save(department, out StatusCode,out Messge);
         }

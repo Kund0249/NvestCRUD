@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NvestApp.Model;
 
 namespace NvestCRUD.Model
 {
-    public class Department
+    public class DepartmentModel
     {
         public int DeptId { get; set; }
 
@@ -25,6 +26,24 @@ namespace NvestCRUD.Model
                     throw new Exception("The Value for the property DepartmentName not valid!");
                 }
             }
+        }
+
+        public static Department ConvertModelToEntity(DepartmentModel model)
+        {
+            return new Department()
+            {
+                DeptId = model.DeptId,
+                DepartmentName = model.DepartmentName
+            };
+        }
+
+        public static DepartmentModel ConvertEntityToModel(Department entity)
+        {
+            return new DepartmentModel()
+            {
+                DeptId = entity.DeptId,
+                DepartmentName = entity.DepartmentName
+            };
         }
     }
 }

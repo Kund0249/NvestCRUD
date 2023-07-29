@@ -4,23 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NvestCRUD.Model;
-using NvestCRUD.DataContext;
-using NvestCRUD.DataProcessor;
+using NvestApp.Processor.ProcessorInterface;
+using NvestApp.Processor.DataProcessor;
+
 
 namespace NvestCRUD
 {
-    class Program
+    class Programs
     {
         static void Main(string[] args)
         {
-            Department department = new Department()
+            DepartmentModel department = new DepartmentModel()
             {
-                DepartmentName = "CS"
+                DepartmentName = "IT"
             };
 
-            IDEPARTMENTDATAPROCESSOR repo = new DEPARTMENTDATAPROCESSOR();
 
-           bool IsCreated =  repo.Save(department, out int ResponseCode, out string ResponseMessage);
+
+            // List<DepartmentModel> departments =   new DEPRTMENTREPOSITORY().GetDepartments;
+
+            IDEPARTMENTDATAPROCESSOR _processor = new DEPARTMENTDATAPROCESSOR();
+
+            bool IsCreated = _processor.Save(DepartmentModel.ConvertModelToEntity(department), out int ResponseCode, out string ResponseMessage);
             if (IsCreated)
             {
                 Console.WriteLine("Success : " + ResponseMessage);

@@ -9,6 +9,8 @@ namespace NvestCRUD.DataContext
 {
    public interface IDEPRTMENTREPOSITORY
     {
-        bool Save(Department department,out int StatusCode,out string Messge);
+        bool Save(DepartmentModel department,out int StatusCode,out string Messge);
+
+        List<DepartmentModel> GetDepartments { get; }
     }
 }
