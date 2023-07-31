@@ -12,5 +12,7 @@ namespace NvestApp.DataLayer.AppInterface
         bool Save(Department department, out int StatusCode, out string Messge);
 
         List<Department> GetDepartments { get; }
+
+        bool Update(Department department, out int StatusCode, out string Messge);
     }
 }

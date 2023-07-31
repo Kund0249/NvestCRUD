@@ -25,6 +25,15 @@ namespace NvestApp.Processor.DataProcessor
             return repo.Save(department, out StatusCode, out Messge);
         }
 
-      
+        public bool Update(Department department, out int StatusCode, out string Messge)
+        {
+            if(department.DeptId == 0)
+            {
+                StatusCode = 400;
+                Messge = "Invalid Value for the Department Id";
+                return false;
+            }
+            return repo.Update(department, out StatusCode, out Messge);
+        }
     }
 }

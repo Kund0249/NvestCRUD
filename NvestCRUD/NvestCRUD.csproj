@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>NvestCRUD.DelegateDemo</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -43,10 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuklUploadExample.cs" />
+    <Compile Include="BulkUpload.cs" />
     <Compile Include="DataContext\DEPRTMENTREPOSITORY.cs" />
     <Compile Include="DataContext\IDEPRTMENTREPOSITORY.cs" />
     <Compile Include="DataProcessor\DEPARTMENTDATAPROCESSOR.cs" />
     <Compile Include="DataProcessor\IDEPARTMENTDATAPROCESSOR.cs" />
+    <Compile Include="DelegateDemo.cs" />
+    <Compile Include="DelegateExample.cs" />
     <Compile Include="Model\DepartmentModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

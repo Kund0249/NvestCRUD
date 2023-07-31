@@ -16,7 +16,8 @@ namespace NvestCRUD
         {
             DepartmentModel department = new DepartmentModel()
             {
-                DepartmentName = "IT"
+                DeptId=28,
+                DepartmentName = "HR_U"
             };
 
 
@@ -25,7 +26,7 @@ namespace NvestCRUD
 
             IDEPARTMENTDATAPROCESSOR _processor = new DEPARTMENTDATAPROCESSOR();
 
-            bool IsCreated = _processor.Save(DepartmentModel.ConvertModelToEntity(department), out int ResponseCode, out string ResponseMessage);
+            bool IsCreated = _processor.Update(DepartmentModel.ConvertModelToEntity(department), out int ResponseCode, out string ResponseMessage);
             if (IsCreated)
             {
                 Console.WriteLine("Success : " + ResponseMessage);
@@ -34,6 +35,9 @@ namespace NvestCRUD
             {
                 switch (ResponseCode)
                 {
+                    case 400:
+                        Console.WriteLine("Bad Request : " + ResponseMessage);
+                        break;
                     case 500:
                         Console.WriteLine("System Error : " + ResponseMessage);
                         break;
