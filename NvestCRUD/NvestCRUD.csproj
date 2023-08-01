@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>NvestCRUD.DelegateDemo</StartupObject>
+    <StartupObject>NvestCRUD.ExtensionMethod.Demo</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,6 +54,13 @@
     <Compile Include="DataProcessor\IDEPARTMENTDATAPROCESSOR.cs" />
     <Compile Include="DelegateDemo.cs" />
     <Compile Include="DelegateExample.cs" />
+    <Compile Include="Delegate_Event\EmailService.cs" />
+    <Compile Include="Delegate_Event\Report.cs" />
+    <Compile Include="Delegate_Event\Startup.cs" />
+    <Compile Include="Delegate_Event\UploadToDrive.cs" />
+    <Compile Include="ExtensionMethod\BasicCal.cs" />
+    <Compile Include="ExtensionMethod\BasicCalExt.cs" />
+    <Compile Include="ExtensionMethod\Demo.cs" />
     <Compile Include="Model\DepartmentModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
