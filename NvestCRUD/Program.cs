@@ -10,13 +10,20 @@ using NvestApp.Processor.DataProcessor;
 
 namespace NvestCRUD
 {
+    enum StatusCode
+    {
+        Success = 200,
+        ContentExist = 401,
+        BadRequest = 400,
+        ServerError = 500,
+    }
     class Programs
     {
         static void Main(string[] args)
         {
             DepartmentModel department = new DepartmentModel()
             {
-                DeptId=28,
+                DeptId = 28,
                 DepartmentName = "HR_U"
             };
 
@@ -27,6 +34,9 @@ namespace NvestCRUD
             IDEPARTMENTDATAPROCESSOR _processor = new DEPARTMENTDATAPROCESSOR();
 
             bool IsCreated = _processor.Update(DepartmentModel.ConvertModelToEntity(department), out int ResponseCode, out string ResponseMessage);
+         
+           
+            
             if (IsCreated)
             {
                 Console.WriteLine("Success : " + ResponseMessage);

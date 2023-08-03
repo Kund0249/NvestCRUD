@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>NvestCRUD.ExtensionMethod.Demo</StartupObject>
+    <StartupObject>NvestCRUD.EnumExample.Startup</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -58,9 +58,16 @@
     <Compile Include="Delegate_Event\Report.cs" />
     <Compile Include="Delegate_Event\Startup.cs" />
     <Compile Include="Delegate_Event\UploadToDrive.cs" />
+    <Compile Include="Dir_File\Demo.cs" />
+    <Compile Include="Dir_File\Demo2.cs" />
+    <Compile Include="Dir_File\Demo3.cs" />
+    <Compile Include="EnumExample\Notifier.cs" />
+    <Compile Include="EnumExample\Startup.cs" />
     <Compile Include="ExtensionMethod\BasicCal.cs" />
     <Compile Include="ExtensionMethod\BasicCalExt.cs" />
     <Compile Include="ExtensionMethod\Demo.cs" />
+    <Compile Include="GenericDemo\QueueDemo.cs" />
+    <Compile Include="GenericDemo\StackDemo.cs" />
     <Compile Include="Model\DepartmentModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
