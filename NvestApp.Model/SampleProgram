@@ -5,12 +5,14 @@ using System.Linq;
 // To execute C#, please define "static void Main" on a class
 // named Solution.
 
-public class Desk{
+public class Desk
+{
     public int DeskId { get; set; }
     public bool IsWindowSeat { get; set; }
 }
 
-public class DeskBooking{
+public class DeskBooking
+{
     public Desk DeskInfo { get; set; }
     public DateTime BookingDate { get; set; }
 }
@@ -21,9 +23,11 @@ class Solution
     List<DeskBooking> deskBookings;
     public Solution()
     {
-         desks = new List<Desk>(){
+        desks = new List<Desk>(){
             new Desk(){DeskId = 1,IsWindowSeat=false},
             new Desk(){DeskId = 2,IsWindowSeat=true},
+            new Desk(){DeskId = 3,IsWindowSeat=true},
+            new Desk(){DeskId = 4,IsWindowSeat=true},
         };
 
         deskBookings = new List<DeskBooking>(){
@@ -38,56 +42,60 @@ class Solution
             new DeskBooking(){
                  DeskInfo = new Desk(){DeskId = 2,IsWindowSeat=true},
                  BookingDate = new DateTime(2024,09,01)
-                },    
+                },
+            new DeskBooking(){
+                 DeskInfo = new Desk(){DeskId = 3,IsWindowSeat=true},
+                 BookingDate = new DateTime(2024,09,01)
+                },
         };
     }
-       
-     public DateTime GetAvailableDateForDesk(int deskId,DateTime currentDate)
+
+    public DateTime GetAvailableDateForDesk(int deskId, DateTime currentDate)
+    {
+        var desk = desks.SingleOrDefault(x => x.DeskId == deskId);
+        if (desk == null)
+            throw new ArgumentException("Invalid desk ID", nameof(deskId));
+
+        var bookings = deskBookings.Where(b => b.DeskInfo.DeskId == deskId && b.BookingDate.ToShortDateString() == currentDate.ToShortDateString());
+
+        if (bookings.Any())
         {
-           var desk = desks.SingleOrDefault(x => x.DeskId == deskId);
-           if(desk == null)
-             throw new ArgumentException("Invalid desk ID",nameof(deskId));
+            var bookingDates = deskBookings.Where(b => b.DeskInfo.DeskId == deskId).Select(x => x.BookingDate);
 
-            var bookings = deskBookings.Where(b => b.DeskInfo.DeskId == deskId && b.BookingDate.ToShortDateString() == currentDate.ToShortDateString());
+            currentDate = currentDate.AddDays(1);
 
-            if(bookings.Any())
+            while (bookingDates.Any(x =>
+            x.ToShortDateString() == currentDate.ToShortDateString()))
             {
-                var bookingDates  = deskBookings.Where(b => b.DeskInfo.DeskId == deskId).Select(x => x.BookingDate);
-
                 currentDate = currentDate.AddDays(1);
-
-                while(bookingDates.Any(x => 
-                x.ToShortDateString() == currentDate.ToShortDateString()))
-                {
-                    currentDate = currentDate.AddDays(1);
-                }
             }
-
-            return currentDate;
         }
 
-      public DateTime GetAvailableWindowSeatForDate(DateTime start, bool hasWindow = true)
-            {
-               var deskWithWindowSeat = desks.Where(x => x.IsWindowSeat == hasWindow);            
-                if (deskWithWindowSeat.Count() == 0)
-                {
-                    throw new ArgumentException("No Desks With windows exist");
-                }
-                
-               // var bookings = deskBookings.Where(x => !deskWithWindowSeat.Contains(x.DeskInfo));
-               
-               if(!deskBookings.Any(x => !deskWithWindowSeat.Contains(x.DeskInfo)))
-               {
-                var bookingDates  =deskBookings.Where(x => x.DeskInfo.IsWindowSeat == hasWindow).Select(x => x.BookingDate);
+        return currentDate;
+    }
 
-                while(bookingDates.Any(x => 
-                x.ToShortDateString() == start.ToShortDateString()))
-                {
-                    start = start.AddDays(1);
-                }
-               }
-                return start;
+    public DateTime GetAvailableWindowSeatForDate(DateTime start, bool hasWindow = true)
+    {
+        var deskWithWindowSeat = desks.Where(x => x.IsWindowSeat == hasWindow);
+        if (deskWithWindowSeat.Count() == 0)
+        {
+            throw new ArgumentException("No Desks With windows exist");
+        }
+        var AvailableDeskWithWindowSeat = deskWithWindowSeat.Where(x => !deskBookings.Select(b => b.DeskInfo.DeskId).Contains(x.DeskId));
+        if (!AvailableDeskWithWindowSeat.Any())
+        {
+            var bookingDates = deskBookings.
+                Where(x => x.DeskInfo.IsWindowSeat == hasWindow).
+                Select(x => x.BookingDate).Distinct();
+
+            while (bookingDates.Any(x =>
+            x.ToShortDateString() == start.ToShortDateString()))
+            {
+                start = start.AddDays(1);
             }
+        }
+        return start;
+    }
 
 
     static void Main(string[] args)
@@ -95,16 +103,17 @@ class Solution
         Solution solutions = new Solution();
         try
         {
-        //  DateTime AvailableDate = solutions.GetAvailableDateForDesk(5,DateTime.Now);
-        //  Console.WriteLine("Available Date : " + AvailableDate.ToShortDateString());
+            //  DateTime AvailableDate = solutions.GetAvailableDateForDesk(5,DateTime.Now);
+            //  Console.WriteLine("Available Date : " + AvailableDate.ToShortDateString());
 
-        DateTime AvailableDate = solutions.GetAvailableWindowSeatForDate(new DateTime(2024,09,01));
-         Console.WriteLine("Available Date : " + AvailableDate.ToShortDateString());
+            DateTime AvailableDate = solutions.GetAvailableWindowSeatForDate(new DateTime(2024, 09, 01));
+            Console.WriteLine("Available Date with window seat : " + AvailableDate.ToShortDateString());
 
         }
-        catch(Exception ex){
-         Console.WriteLine(ex.Message);
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
-       
+
     }
 }
